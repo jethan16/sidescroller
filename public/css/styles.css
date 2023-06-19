@@ -1,0 +1,22 @@
+body {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+#root {
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+}
+
+.canvas-wrapper {
+}
+
+.canvas {
+    border: solid 5px black;
+}
