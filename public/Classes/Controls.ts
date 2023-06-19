@@ -1,8 +1,12 @@
-import { Square, breakPoint, platforms } from '../game.js';
+import { Square, breakPoint, platforms } from '../game';
 import { Platform } from './Platform.js';
 
 export class Controller {
-    constructor(playerPosition, playerVelocity) {
+    playerPosition: {x: number; y: number;};
+    playerVelocity: {x: number; y: number;};
+    controlSpeed: number;
+    keyLookup: Record<string, {enabled: boolean, fn: (keyType: string) => void}>
+    constructor(playerPosition: {x: number; y: number;}, playerVelocity: {x: number; y: number;}) {
         this.playerPosition = playerPosition;
         this.playerVelocity = playerVelocity;
         this.controlSpeed = 10;
@@ -51,14 +55,14 @@ export class Controller {
     pause() {}
 
     // movement
-    arrowUp(keyType) {
+    arrowUp(keyType: string) {
         if (!this.keyLookup.ArrowUp.enabled) return;
         if (keyType === 'keydown') { 
             this.playerVelocity.y -= this.controlSpeed;
         }
         else if (keyType === 'keyup') this.playerVelocity.y = 0;
     }
-    arrowRight(keyType) {
+    arrowRight(keyType: string) {
         if (keyType === 'keydown') { 
             // disable movement past break points.
             if (this.playerPosition.x > breakPoint.right) return platforms.forEach(platform => platform.velocity.x = -10);
@@ -71,7 +75,7 @@ export class Controller {
     arrowDown() {
         this.playerVelocity.y = 0;
     }
-    arrowLeft(keyType) {
+    arrowLeft(keyType: string) {
         if (keyType === 'keydown') { 
             // disable movement past break points.
             if (this.playerPosition.x < breakPoint.left) return platforms.forEach(platform => platform.velocity.x = 10);
@@ -82,11 +86,11 @@ export class Controller {
         };
     }
 
-    useControls(key, type, repeat) {
+    useControls(key: string, type: 'keydown' | 'keyup', repeat: boolean) {
         if (repeat) this.keyLookup.ArrowUp.enabled = false;
         else this.keyLookup.ArrowUp.enabled = true;
 
-        if (this.keyLookup.hasOwnProperty(key)) this.keyLookup[key].fn.call(this, type);
+        if (this.keyLookup.hasOwnProperty(key)) this.keyLookup[key].fn.call(this, 'type');
         else return;
     }
 }
