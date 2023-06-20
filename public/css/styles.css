@@ -15,6 +15,7 @@ body {
 }
 
 .canvas-wrapper {
+    border: solid 5px black;
 }
 
 .canvas {
