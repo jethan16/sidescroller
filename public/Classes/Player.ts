@@ -1,5 +1,5 @@
-import {c, canvas, gravity} from '../game';
-import { Controller } from './Controls';
+import {c, canvas, gravity} from '../game.js';
+import { Controller } from './Controls.js';
 
 export class Player {
     height: number;
@@ -32,9 +32,6 @@ export class Player {
         this.playerController = PlayerControls;
         this.isJumping = false;
     };
-
-    getIsJumping() {};
-    setIsJumping() {};
 
     draw() {
         c!.fillStyle = 'red';

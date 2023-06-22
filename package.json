@@ -2,14 +2,17 @@
   "name": "sidescroller",
   "description": "",
   "version": "1.0.0",
-  "main": "index.ts",
+  "main": "index.js",
+  "typings": "index.d.ts",
   "type": "module",
   "scripts": {
-    "build": "npm run tsc && npm run copyfiles",
+    "build": "rimraf dist && npx tsc && npm run copyfiles",
     "tsc": "tsc",
+    "prestart": "npm run build",
     "start": "node dist/index.js",
-    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\"",
-    "copyfiles": "copyfiles -u 1 public/**/*.html public/**/*.css dist/public"
+    "predev": "npm run build",
+    "dev": "concurrently \"npx tsc -w\" \"nodemon dist/index.js\"",
+    "copyfiles": "copyfiles -u 1 public/**/*.html public/**/*.css public/images/** dist/public"
   },
   "keywords": [],
   "author": "",
@@ -29,6 +32,7 @@
     "copyfiles": "^2.4.1",
     "eslint": "^8.43.0",
     "nodemon": "^2.0.22",
-    "typescript": "^5.1.3"
+    "typescript": "^5.1.3",
+    "rimraf": "^5.0.1"
   }
 }

@@ -1,7 +1,6 @@
-import { c } from "../game";
-// import {platformPNG} from '../images/platform.png';
-const platformPNG = new Image();
-platformPNG.src='../images/platform.png'
+import { c } from "../game.js";
+// const platformPNG = new Image();
+// platformPNG.src='../images/platform.png'
 
 export class Platform {
     position: {x: number; y: number;};
@@ -26,7 +25,7 @@ export class Platform {
 
     draw() {
         c!.fillStyle = 'black';
-        c!.drawImage(platformPNG, this.position.x, this.position.y, this.width, this.height)
-        // c.fillRect(this.position.x, this.position.y, this.width, this.height)
+        // c!.drawImage(platformPNG, this.position.x, this.position.y, this.width, this.height)
+        c?.fillRect(this.position.x, this.position.y, this.width, this.height)
     };
 }

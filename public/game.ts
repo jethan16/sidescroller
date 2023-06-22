@@ -1,5 +1,5 @@
-import { Player } from './Classes/Player';
-import { Platform } from './Classes/Platform'
+import { Player } from './Classes/Player.js';
+import { Platform } from './Classes/Platform.js'
 export const canvas = document.querySelector('canvas');
 export const c = canvas?.getContext('2d');
 
@@ -11,10 +11,10 @@ export const breakPoint = {
     right: canvas!.width * .5
 };
 export const playerStart = {
-    x: canvas?.width ?? 0 - (canvas!.width - 300),
-    y: canvas?.height ?? 0 - 50
+    x: canvas?.width ?? 100 - (canvas!.width - 300),
+    y: canvas?.height ?? 100 - 50
 };
-export const Square = new Player(50, 50, {...playerStart}, {x: 0, y: 0});
+export const Square = new Player(50, 50, {x: 100, y: 0}, {x: 0, y: 0});
 
 export const platforms = [
     new Platform({x: canvas!.width - canvas!.width + 100, y: canvas!.height - 25}, 200, 20), 
@@ -50,11 +50,7 @@ export const animate = () => {
         Square.velocity.x = 0;
     }
 };
-
-export const startGame = () => {
-    animate()
-    window.addEventListener('keydown', (e) => {Square.controlCharacter(e)});
-    window.addEventListener('keyup', (e) => {Square.controlCharacter(e)});
-}
-export const logger = () => console.log('logger!')
+animate()
+window.addEventListener('keydown', (e) => {Square.controlCharacter(e)});
+window.addEventListener('keyup', (e) => {Square.controlCharacter(e)});
 

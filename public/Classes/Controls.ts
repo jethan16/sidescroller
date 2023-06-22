@@ -1,4 +1,4 @@
-import { Square, breakPoint, platforms } from '../game';
+import { Square, breakPoint, platforms } from '../game.js';
 import { Platform } from './Platform.js';
 
 export class Controller {
@@ -92,5 +92,5 @@ export class Controller {
 
         if (this.keyLookup.hasOwnProperty(key)) this.keyLookup[key].fn.call(this, 'type');
         else return;
-    }
+    };
 }
