@@ -89,8 +89,6 @@ export class Controller {
     useControls(key: string, type: 'keydown' | 'keyup', repeat: boolean) {
         if (repeat) this.keyLookup.ArrowUp.enabled = false;
         else this.keyLookup.ArrowUp.enabled = true;
-
-        if (this.keyLookup.hasOwnProperty(key)) this.keyLookup[key].fn.call(this, 'type');
-        else return;
+        this.keyLookup[key].fn.call(this, type);
     };
 }

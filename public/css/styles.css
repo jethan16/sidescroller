@@ -15,9 +15,9 @@ body {
 }
 
 .canvas-wrapper {
-    border: solid 5px black;
+    /* border: solid 5px black; */
 }
 
-.canvas {
+#canvas {
     border: solid 5px black;
 }

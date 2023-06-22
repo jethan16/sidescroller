@@ -7,14 +7,14 @@ canvas!.setAttribute('width', (window.innerWidth - 10).toString())
 canvas!.setAttribute('height', (window.innerHeight * .5).toString())
 
 export const breakPoint = {
-    left: 200,
+    left: 75,
     right: canvas!.width * .5
 };
 export const playerStart = {
-    x: canvas?.width ?? 100 - (canvas!.width - 300),
-    y: canvas?.height ?? 100 - 50
+    x: 100,
+    y: 0
 };
-export const Square = new Player(50, 50, {x: 100, y: 0}, {x: 0, y: 0});
+export const Square = new Player(50, 50, {...playerStart}, {x: 0, y: 0});
 
 export const platforms = [
     new Platform({x: canvas!.width - canvas!.width + 100, y: canvas!.height - 25}, 200, 20), 
