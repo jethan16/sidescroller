@@ -56,7 +56,10 @@ export class Controller {
 
     // movement
     arrowUp(keyType: string) {
+        // disable double jumping and flying
         if (!this.keyLookup.ArrowUp.enabled) return;
+        if (this.playerVelocity.y > 0) return;
+
         if (keyType === 'keydown') { 
             this.playerVelocity.y -= this.controlSpeed;
         }
@@ -65,7 +68,7 @@ export class Controller {
     arrowRight(keyType: string) {
         if (keyType === 'keydown') { 
             // disable movement past break points.
-            if (this.playerPosition.x > breakPoint.right) return platforms.forEach(platform => platform.velocity.x = -10);
+            if ((this.playerPosition.x + 50) > breakPoint.right) return platforms.forEach(platform => platform.velocity.x = -10);
             this.playerVelocity.x = this.controlSpeed;
         } else if (keyType === 'keyup') {
             if (this.playerPosition.x > breakPoint.right) return platforms.forEach(platform => platform.velocity.x = 0);

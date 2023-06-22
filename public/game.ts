@@ -1,7 +1,7 @@
 import { Player } from './Classes/Player.js';
 import { Platform } from './Classes/Platform.js'
-export const canvas = document.querySelector('canvas');
-export const c = canvas?.getContext('2d');
+export const canvas = document.querySelector('canvas')!;
+export const c = canvas.getContext('2d');
 
 canvas!.setAttribute('width', (window.innerWidth - 10).toString())
 canvas!.setAttribute('height', (window.innerHeight * .5).toString())
@@ -12,7 +12,7 @@ export const breakPoint = {
 };
 export const playerStart = {
     x: 100,
-    y: 0
+    y: canvas.height - 50
 };
 export const Square = new Player(50, 50, {...playerStart}, {x: 0, y: 0});
 
