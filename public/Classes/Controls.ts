@@ -61,30 +61,34 @@ export class Controller {
         if (this.playerVelocity.y > 0) return;
 
         if (keyType === 'keydown') { 
-            this.playerVelocity.y -= this.controlSpeed;
-        }
-        else if (keyType === 'keyup') this.playerVelocity.y = 0;
+            if (this.playerPosition.y < breakPoint.middle) platforms.forEach(platform => platform.velocity.y = this.controlSpeed)
+            this.playerVelocity.y -= this.controlSpeed 
+        } else if (keyType === 'keyup') {
+            platforms.forEach(platform => platform.velocity.y = 0)
+            this.playerVelocity.y = 0
+        };
     }
     arrowRight(keyType: string) {
         if (keyType === 'keydown') { 
             // disable movement past break points.
-            if ((this.playerPosition.x + 50) > breakPoint.right) return platforms.forEach(platform => platform.velocity.x = -10);
-            this.playerVelocity.x = this.controlSpeed;
+            if (this.playerPosition.x > breakPoint.right) platforms.forEach(platform => platform.velocity.x = -this.controlSpeed);
+            else this.playerVelocity.x = this.controlSpeed;
         } else if (keyType === 'keyup') {
-            if (this.playerPosition.x > breakPoint.right) return platforms.forEach(platform => platform.velocity.x = 0);
+            if (this.playerPosition.x > breakPoint.right) platforms.forEach(platform => platform.velocity.x = 0);
             this.playerVelocity.x = 0
         };
     }
-    arrowDown() {
-        this.playerVelocity.y = 0;
+    arrowDown(keyType: string) {
+        // this.playerVelocity.y = 0;
+        // TODO: initialize falling
     }
     arrowLeft(keyType: string) {
         if (keyType === 'keydown') { 
             // disable movement past break points.
-            if (this.playerPosition.x < breakPoint.left) return platforms.forEach(platform => platform.velocity.x = 10);
-            this.playerVelocity.x = -this.controlSpeed;
+            if (this.playerPosition.x < breakPoint.left) platforms.forEach(platform => platform.velocity.x = this.controlSpeed);
+            else this.playerVelocity.x = -this.controlSpeed;
          } else if (keyType === 'keyup') {
-            if (this.playerPosition.x < breakPoint.left) return platforms.forEach(platform => platform.velocity.x = 0);
+            if (this.playerPosition.x < breakPoint.left) platforms.forEach(platform => platform.velocity.x = 0);
             this.playerVelocity.x = 0
         };
     }
@@ -92,6 +96,15 @@ export class Controller {
     useControls(key: string, type: 'keydown' | 'keyup', repeat: boolean) {
         if (repeat) this.keyLookup.ArrowUp.enabled = false;
         else this.keyLookup.ArrowUp.enabled = true;
-        this.keyLookup[key].fn.call(this, type);
+
+        if (this.playerPosition.x < breakPoint.left || this.playerPosition.x > breakPoint.right) {
+            this.playerVelocity.x = 0;
+        }
+        // if (this.playerPosition.y > breakPoint.top) {
+        //     this.playerVelocity.y = 0   
+        // }
+
+        if (this.keyLookup.hasOwnProperty(key)) this.keyLookup[key].fn.call(this, type);
+        else return
     };
 }
